@@ -1,136 +1,33 @@
-from openpyxl import load_workbook
-import os
-class Indice:
-    EMPRESA = 0
-    NOME_EMPRESA = 5
-    POSICAO_COMISSAO = 1
-    POS_EMPREGADO = 1
-    NOV = 12
-    DEZ = 15
-    JAN = 19
-    FEV = 21
-    MAR = 24
-    ABR = 26
-    MAI = 29
-    JUN = 31
-    JUL = 34
-    AGO = 37
-    SET = 41
-    OUT = 46
-
-
-
-def ler_planilha_verbas():
-    pasta_verbas = load_workbook('planilhas/Ficha Financeira Garra Santo Angelo.xlsx')
-    planilha_verbas = pasta_verbas['Ficha Financeira']
-    
-    dic_empregado = {}
-    for linha in planilha_verbas.values:
-        if linha[Indice.EMPRESA] == 'Empresa:':
-            # codigo_empresa = linha[Indice.NOME_EMPRESA].split('-')[0]
-            codigo_empresa = '2371'
-            # print(codigo_empresa)
-        
-        if linha[Indice.POS_EMPREGADO] == 'Empregado:':
-            codigo_empregado = linha[8].split('-')[0]
-            # print(f'empregado => {codigo_empregado}')
-            dic_empregado[codigo_empregado] = {}
-            dic_empregado[codigo_empregado][37] = {}
-            dic_empregado[codigo_empregado][250] = {}
-
-    
-
-        if linha[Indice.POSICAO_COMISSAO] == 37:
-
-            if linha[Indice.NOV]:
-                dic_empregado[codigo_empregado][37].update({'112021' : linha[Indice.NOV]})
-                
-            if linha[Indice.DEZ]:
-                dic_empregado[codigo_empregado][37].update({'122021' : linha[Indice.DEZ]})
-                
-            if linha[Indice.JAN]:
-                dic_empregado[codigo_empregado][37].update({'012022' : linha[Indice.JAN]})
-                
-            if linha[Indice.FEV]:
-                
-                dic_empregado[codigo_empregado][37].update({'022022' : linha[Indice.FEV]})
-            if linha[Indice.MAR]:
-                
-                dic_empregado[codigo_empregado][37].update({'032022' : linha[Indice.MAR]})
-            if linha[Indice.ABR]:
-                dic_empregado[codigo_empregado][37].update({'042022' : linha[Indice.ABR]})
-                
-            if linha[Indice.MAI]:
-                dic_empregado[codigo_empregado][37].update({'052022' : linha[Indice.MAI]})
-                
-            if linha[Indice.JUN]:
-                dic_empregado[codigo_empregado][37].update({'062022' : linha[Indice.JUN]})
-                
-            if linha[Indice.JUL]:
-                
-                dic_empregado[codigo_empregado][37].update({'072022' : linha[Indice.JUL]})
-            if linha[Indice.AGO]:
-                dic_empregado[codigo_empregado][37].update({'082022' : linha[Indice.AGO]})
-                
-            if linha[Indice.SET]:
-                dic_empregado[codigo_empregado][37].update({'092022' : linha[Indice.SET]})
-                
-            if linha[Indice.OUT]:
-                dic_empregado[codigo_empregado][37].update({'102022' : linha[Indice.OUT]})
-
-        if linha[Indice.POSICAO_COMISSAO] == 250 or linha[Indice.POSICAO_COMISSAO] == 853 or linha[Indice.POSICAO_COMISSAO] == 854:
-            if linha[Indice.NOV]:
-                if not dic_empregado[codigo_empregado][250].get('112021'):
-                    dic_empregado[codigo_empregado][250].update({'112021' : linha[Indice.NOV]})
-                else:
-                    dic_empregado[codigo_empregado][250]['112021'] += linha[Indice.NOV]
-                
-            if linha[Indice.DEZ]:
-                dic_empregado[codigo_empregado][250].update({'122021' : linha[Indice.DEZ]})
-                
-            if linha[Indice.JAN]:
-                dic_empregado[codigo_empregado][250].update({'012022' : linha[Indice.JAN]})
-                
-            if linha[Indice.FEV]:
-                
-                dic_empregado[codigo_empregado][250].update({'022022' : linha[Indice.FEV]})
-            if linha[Indice.MAR]:
-                
-                dic_empregado[codigo_empregado][250].update({'032022' : linha[Indice.MAR]})
-            if linha[Indice.ABR]:
-                dic_empregado[codigo_empregado][250].update({'042022' : linha[Indice.ABR]})
-                
-            if linha[Indice.MAI]:
-                dic_empregado[codigo_empregado][250].update({'052022' : linha[Indice.MAI]})
-                
-            if linha[Indice.JUN]:
-                dic_empregado[codigo_empregado][250].update({'062022' : linha[Indice.JUN]})
-                
-            if linha[Indice.JUL]:
-                
-                dic_empregado[codigo_empregado][250].update({'072022' : linha[Indice.JUL]})
-            if linha[Indice.AGO]:
-                dic_empregado[codigo_empregado][250].update({'082022' : linha[Indice.AGO]})
-                
-            if linha[Indice.SET]:
-                dic_empregado[codigo_empregado][250].update({'092022' : linha[Indice.SET]})
-                
-            if linha[Indice.OUT]:
-                dic_empregado[codigo_empregado][250].update({'102022' : linha[Indice.OUT]})
-                 
-    print(dic_empregado)    
-        
-            
-
-
-        
-        
-    
-    
-
-
-
+from leitura_ficha_financeira import ler_planilha_verbas
+from login_unico import logar_unico
+from selecionar_mod_DP import acessar_modulo_folha   
+from modulo_rendimentos_variaveis import *
+from formatar_valores import formatar_valores_reais
+from de_para import de_para_unico
 
 if __name__ == '__main__':
-    ler_planilha_verbas()
+    # logar_unico()
+    # acessar_modulo_folha()
+    # acessar_rendimentos_variariveis()
+    nova_empresa = True
+    novo_empregado = True
+    dic_empresa = ler_planilha_verbas()
+    # print(dic_empresa)
+    # print(dic_empresa.get('2371').get('52 '))
+    for cod_empresa in dic_empresa.keys():
+        nova_empresa = True
+        # print(cod_empresa)
+        for cod_empregado in dic_empresa.get(cod_empresa).keys():
+            novo_empregado = True
+            # print(cod_empregado)
+            for rendimentos_variaveis in dic_empresa.get(cod_empresa).get(cod_empregado).keys():
+                # print(rendimentos_variaveis)
+                for competencias, valores in dic_empresa.get(cod_empresa).get(cod_empregado).get(rendimentos_variaveis).items():
+                    print(cod_empresa, cod_empregado, rendimentos_variaveis, competencias, formatar_valores_reais(valores))
+                    print(type(valores))
+                    cadastro_ficha_rendimentos_variaveis(cod_empresa, cod_empregado.strip(), competencias, de_para_unico(rendimentos_variaveis), formatar_valores_reais(valores), nova_empresa, novo_empregado)
+                    nova_empresa = False
+                    novo_empregado = False
+            exit(1)
+
     
