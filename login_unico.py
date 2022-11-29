@@ -25,7 +25,7 @@ def logar_unico():
     sleep(1)
     # entrar no sistema
     pyautogui.press('enter')
-    sleep(20)
+    sleep(40)
 
 
 if __name__ == '__main__':

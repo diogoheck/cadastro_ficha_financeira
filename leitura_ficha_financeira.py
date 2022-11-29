@@ -21,7 +21,7 @@ class Indice:
 
 
 def ler_planilha_verbas():
-    pasta_verbas = load_workbook('planilhas/Ficha Financeira Garra Santo Angelo.xlsx')
+    pasta_verbas = load_workbook('R:\Compartilhado\Ti\planilha_ficha_financeira\Ficha Financeira Garra Santo Angelo.xlsx')
     planilha_verbas = pasta_verbas['Ficha Financeira']
     
     dic_empregado = {}
