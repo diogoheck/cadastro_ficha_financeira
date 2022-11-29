@@ -20,7 +20,10 @@ def cadastro_ficha_rendimentos_variaveis(cod_empresa, cod_empregado, competencia
         pyautogui.write(cod_empregado)
         sleep(1)
         pyautogui.press('enter')
-        sleep(1)
+        sleep(3)
+        if pyautogui.locateCenterOnScreen('colaborador_nao_cadastrado.png'):
+            pyautogui.click(844,438, duration=1)
+            return False
     else:
         pyautogui.press('enter')
         sleep(1)
@@ -35,6 +38,8 @@ def cadastro_ficha_rendimentos_variaveis(cod_empresa, cod_empregado, competencia
     sleep(1)
     pyautogui.press('enter')
     sleep(1)
+
+    return True
 
     
 
