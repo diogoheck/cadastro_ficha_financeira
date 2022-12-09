@@ -11,19 +11,23 @@ def acessar_rendimentos_variariveis():
 
 
 def cadastro_ficha_rendimentos_variaveis(cod_empresa, cod_empregado, competencia, verba, valor, nova_empresa, novo_empregado):
+
     if nova_empresa:
         pyautogui.doubleClick(166,178, duration=2)
         pyautogui.write(cod_empresa)
-        sleep(1)
+        sleep(2)
         pyautogui.press('enter')
     if novo_empregado:
         pyautogui.write(cod_empregado)
-        sleep(1)
+        sleep(2)
         pyautogui.press('enter')
         sleep(3)
-        if pyautogui.locateCenterOnScreen('colaborador_nao_cadastrado.png'):
-            pyautogui.click(844,438, duration=1)
+    # print(pyautogui.locateOnScreen('colaborador_nao_cadastrado.png'))
+        if not not pyautogui.locateOnScreen('colaborador_nao_cadastrado.png'):
+            pyautogui.click(844,438, duration=2)
+            sleep(2)
             return False
+            
     else:
         pyautogui.press('enter')
         sleep(1)
